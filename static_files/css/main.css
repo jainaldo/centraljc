@@ -1,0 +1,59 @@
+@font-face {
+    font-family: 'Montserrat-Bold'; /*a name to be used later*/
+    src: url('../fonts/Montserrat/Montserrat-Bold.otf'); /*URL to font*/
+}
+
+.app-item a{
+  background: #f5f5f5;
+  display: block;
+  border-radius: 4px;
+  padding: 35px 0px;
+  text-align: center;
+  position: relative;
+  height: 130px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-right: 0px;
+}
+.app-item {
+  padding-left: 0px !important;
+}
+
+@media only screen and (min-width : 601px){
+  nav{
+    height: 100px;
+  }
+}
+nav{
+  height: 100px;
+}
+
+.green-text.text-lighten-2{
+  color: #00A03A !important;
+}
+.brand-logo{
+  font-family: 'Montserrat-Bold';
+}
+
+/*.switch label .desativado{
+  background-color: red;
+}
+
+.switch label .desativado:after{
+  background-color: red;
+}*/
+
+.switch label .lever{
+  background-color: #EA4335;
+}
+
+.switch label .lever:after{
+  background-color: #EA4335;
+}
+
+.switch label input[type=checkbox]:checked + .lever {
+  background-color: #34A853;
+}
+.switch label input[type=checkbox]:checked + .lever:after{
+  background-color: #34A853;
+}

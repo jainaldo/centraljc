@@ -1,0 +1,22 @@
+{% load staticfiles %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang='en'>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no' name='viewport' />
+    <title>Central de Atendimento - JC</title>
+    {% include 'material/includes/material_css.html' %}
+    {% include 'material/includes/material_js.html' %}
+    <link href='{% static 'css/style.css'%}' type='text/css' rel='stylesheet' />
+    <link href='{% static 'css/main.css'%}' type='text/css' rel='stylesheet' />
+    <link href='{% static 'font-awesome/css/font-awesome.css'%}' rel='stylesheet' />
+  </head>
+  <body>
+    {% include 'includes/navbar.html' %}
+    <div class='container'>
+      {% block main %}
+      {% endblock %}
+    </div>
+    {% include 'includes/footer.html' %}
+  </body>
+</html>

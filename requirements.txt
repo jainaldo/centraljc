@@ -1,0 +1,10 @@
+Django==1.8.4
+hamlpy
+django-material
+model_mommy
+should-dsl
+http://darcs.idyll.org/~t/projects/figleaf-0.6.1.tar.gz
+specloud
+django-nose
+coverage
+pinocchio

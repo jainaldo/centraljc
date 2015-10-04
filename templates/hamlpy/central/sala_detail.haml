@@ -1,0 +1,51 @@
+- extends 'base.html'
+- block main
+  .row
+    .col.s12.m12.l12.app
+      .card
+        .card-content
+          %span.card-title.black-text.center
+            = object
+            Data: {% now 'd/m/Y'%}
+          .row
+            %table.hoverable.responsive-table
+              %thead
+                %tr
+                  %th{:data-field =>"n_ficha"}
+                    Ficha
+                  %th{:data-field =>"crianca"}
+                    Nome da Criança
+                  %th{:data-field =>"responsavel"}
+                    Responsável
+                  %th{:data-field =>"telefone"}
+                    Telefone
+                  %th{:data-field =>"ativo"}
+                    Status
+              %tbody
+              - for ficha in list_fichas
+                %tr
+                  %td
+                    = ficha.n_ficha
+                  %td
+                    = ficha.crianca
+                  %td
+                    = ficha.responsavel
+                  %td
+                    = ficha.telefone
+                  %td
+                    %form{:action => "", :id => "{{ficha.id}}", :method => "POST"}
+                      - csrf_token
+                      %input{:type => "hidden", :name => "ficha_id", :value => "{{ficha.id}}"}
+                      .switch
+                        %label
+                          - if ficha.ativo
+                            %input{:id => "{{ficha.slug}}", :checked => "", :type => "checkbox"}/
+                          - else
+                            %input{:id => "{{ficha.slug}}", :type => "checkbox"}/
+                          %span.lever
+                :javascript
+                  $(function(){
+                    $('#{{ficha.slug}}').on('change',function(){
+                      $('#{{ficha.id}}').submit();
+                    });
+                  });

@@ -1,0 +1,10 @@
+- load staticfiles
+%nav.white{:role => "navigation"}
+  .nav-wrapper.container
+    %a#logo-container.brand-logo{:href => "{% url 'home'%}"}
+      .row
+        .col.s12.l4
+          %img.right{:alt => "Logo JC", :src => "{% static 'img/logo.png'%}"}/
+        .col.l4.hide-on-med-and-down
+          %h3.left
+            Central de Atendimento

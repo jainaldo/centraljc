@@ -1,0 +1,17 @@
+{% load staticfiles %}
+<nav class='white' role='navigation'>
+  <div class='nav-wrapper container'>
+    <a id='logo-container' class='brand-logo' href='{% url 'home'%}'>
+      <div class='row'>
+        <div class='col s12 l4'>
+          <img class='right' src='{% static 'img/logo.png'%}' alt='Logo JC' />
+        </div>
+        <div class='col l4 hide-on-med-and-down'>
+          <h3 class='left'>
+            Central de Atendimento
+          </h3>
+        </div>
+      </div>
+    </a>
+  </div>
+</nav>
