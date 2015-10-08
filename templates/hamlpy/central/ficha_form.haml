@@ -1,0 +1,30 @@
+- load material_form
+#ficha_new.modal
+  .modal-content
+    %h4.center Ficha para
+      = object
+    %form{:method => "POST", :action => "."}
+      - csrf_token
+      {% form %}
+        {% part form.n_ficha prefix %}
+          %i.fa.fa-ticket.prefix
+        {% endpart %}
+        {% part form.crianca prefix %}
+          %i.fa.fa-smile-o.prefix
+        {% endpart %}
+        {% part form.responsavel prefix %}
+          %i.fa.fa-user.prefix
+        {% endpart %}
+        {% part form.telefone prefix %}
+          %i.fa.fa-phone-square.prefix
+        {% endpart %}
+      {% endform %}
+      .modal-footer
+        %button.btn.green{:name => "_submit_ficha_form", :type => "submit"} Cadastrar
+        %a.modal-action.modal-close.waves-effect.waves-green.btn-flat{:href => "#!"} Cancelar
+:javascript
+  $(document).ready(function(){
+    \// the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+    $('.modal-trigger').leanModal();
+    $('#id_telefone').mask("(99) 9 9999-9999")
+  });

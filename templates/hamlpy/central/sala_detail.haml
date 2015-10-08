@@ -1,12 +1,19 @@
 - extends 'base.html'
 - block main
+  - if messages
+    - for message in messages
+      .card-panel.{ :class => "{{ message.tags }}" }
+        = message
   .row
     .col.s12.m12.l12.app
       .card
         .card-content
-          %span.card-title.black-text.center
-            = object
-            Data: {% now 'd/m/Y'%}
+          %span.card-title.black-text
+            %h4.center
+              = object
+              Data: {% now 'd/m/Y'%}
+              %a.right.btn-floating.btn-large.waves-effect.waves-light.green.modal-trigger{:href => "#ficha_new"}
+                %i.fa.fa-plus
           .row
             %table.hoverable.responsive-table
               %thead
@@ -35,17 +42,22 @@
                   %td
                     %form{:action => "", :id => "{{ficha.id}}", :method => "POST"}
                       - csrf_token
-                      %input{:type => "hidden", :name => "ficha_id", :value => "{{ficha.id}}"}
+                      %input{:type => "hidden", :name => "_submit_ficha_id_status", :value => "{{ficha.id}}"}
                       .switch
                         %label
                           - if ficha.ativo
-                            %input{:id => "{{ficha.slug}}", :checked => "", :type => "checkbox"}/
+                            %input{:id => "id_ficha_{{ficha.id}}", :checked => "", :type => "checkbox"}/
                           - else
-                            %input{:id => "{{ficha.slug}}", :type => "checkbox"}/
+                            %input{:id => "id_ficha_{{ficha.id}}", :type => "checkbox"}/
                           %span.lever
                 :javascript
                   $(function(){
-                    $('#{{ficha.slug}}').on('change',function(){
+                    $('#id_ficha_{{ficha.id}}').on('change',function(){
                       $('#{{ficha.id}}').submit();
                     });
                   });
+              - empty
+                %tr
+                  %td
+                    %h5 Ainda não tem criança nesta sala
+  - include 'central/ficha_form.html'

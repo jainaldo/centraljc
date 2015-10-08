@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+  # -*- coding: utf-8 -*-
 from django.test import TestCase
 from should_dsl import should
 from django.test import Client
@@ -29,11 +29,22 @@ class TestViewSalaDetail(TestCase):
     def test_mostra_lista_fichas_da_sala_de_hoje(self):
         response = client.get(reverse('sala_detail',
                               kwargs={'slug': self.sala_1.slug}))
-        response.context['list_fichas'][0] \
-                                    | should | equal_to(self.ficha_1)
+        response.context['list_fichas'][0] | should | equal_to(self.ficha_1)
 
-    def test_url_SalaDetailView_redirect_post(self):
+    def test_alterar_status_ficha(self):
         response = client.post(reverse('sala_detail',
-                                       kwargs={'slug': self.sala_1.slug}),
-                               {'ficha_id': self.ficha_1.id})
+                               kwargs={'slug': self.sala_1.slug}),
+                               {'_submit_ficha_id_status': self.ficha_1.id})
+
         response.status_code | should | equal_to(302)
+
+        response = client.get(reverse('sala_detail',
+                              kwargs={'slug': self.sala_1.slug}))
+        ficha = response.context['list_fichas'][0]
+        ficha.ativo | should | equal_to(False)
+
+        #Não é uma ficha
+        response = client.post(reverse('sala_detail',
+                               kwargs={'slug': self.sala_1.slug}),
+                               {'_submit_ficha_id_status': 1000})
+        response.status_code | should | equal_to(404)

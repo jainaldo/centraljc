@@ -8,7 +8,7 @@
           .row
             - for sala in list_salas
               .app-item.col.s6.m6.l4
-                %a.waves-effect.waves-light.green-text.text-lighten-2{:href => "{% url 'sala_detail' sala.slug %}"}
+                %a.waves-effect.waves-light.green-text.text-lighten-2.grey.lighten-2{:href => "{% url 'sala_detail' sala.slug %}"}
                   %i.fa.fa-4x.fa-users
                   %h6{:style => "truncate word-wrap: break-word;"}
                     = sala

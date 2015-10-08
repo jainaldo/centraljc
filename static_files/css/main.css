@@ -57,3 +57,34 @@ nav{
 .switch label input[type=checkbox]:checked + .lever:after{
   background-color: #34A853;
 }
+
+.input-field .prefix.active {
+  color: #4CAF50;
+}
+
+
+input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly]), input[type=email]:focus:not([readonly]), input[type=url]:focus:not([readonly]), input[type=time]:focus:not([readonly]), input[type=date]:focus:not([readonly]), input[type=datetime-local]:focus:not([readonly]), input[type=tel]:focus:not([readonly]), input[type=number]:focus:not([readonly]), input[type=search]:focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
+    border-bottom: 1px solid #4CAF50;
+    box-shadow: 0 1px 0 0 #4CAF50; }
+
+input[type=text]:focus:not([readonly]) + label, input[type=password]:focus:not([readonly]) + label, input[type=email]:focus:not([readonly]) + label, input[type=url]:focus:not([readonly]) + label, input[type=time]:focus:not([readonly]) + label, input[type=date]:focus:not([readonly]) + label, input[type=datetime-local]:focus:not([readonly]) + label, input[type=tel]:focus:not([readonly]) + label, input[type=number]:focus:not([readonly]) + label, input[type=search]:focus:not([readonly]) + label, textarea.materialize-textarea:focus:not([readonly]) + label {
+    color: #4CAF50; }
+
+
+.success{
+  background-color: #4caf50;
+  color: white;
+  line-height: 12px;
+}
+.card-panel.error{
+  background-color: #f44336;
+  color: white;
+  top: 0px;
+}
+.modal{
+  max-height: 80%;
+}
+
+table.hoverable > tbody > tr:hover {
+  background-color: #eeeeee !important;
+}

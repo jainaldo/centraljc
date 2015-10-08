@@ -1,12 +1,24 @@
 {% extends 'base.html' %}
 {% block main %}
+  {% if messages %}
+    {% for message in messages %}
+      <div class='card-panel  {{ message.tags }}'>
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
   <div class='row'>
     <div class='col s12 m12 l12 app'>
       <div class='card'>
         <div class='card-content'>
-          <span class='card-title black-text center'>
-            {{ object }}
-            Data: {% now 'd/m/Y'%}
+          <span class='card-title black-text'>
+            <h4 class='center'>
+              {{ object }}
+              Data: {% now 'd/m/Y'%}
+              <a class='right btn-floating btn-large waves-effect waves-light green modal-trigger' href='#ficha_new'>
+                <i class='fa fa-plus'></i>
+              </a>
+            </h4>
           </span>
           <div class='row'>
             <table class='hoverable responsive-table'>
@@ -47,27 +59,33 @@
                   <td>
                     <form id='{{ficha.id}}' action='' method='POST'>
                       {% csrf_token %}
-                      <input type='hidden' name='ficha_id' value='{{ficha.id}}' />
+                      <input type='hidden' name='_submit_ficha_id_status' value='{{ficha.id}}' />
                       <div class='switch'>
                         <label>
                           {% if ficha.ativo %}
-                            <input id='{{ficha.slug}}' type='checkbox' checked='' />
+                            <input id='id_ficha_{{ficha.id}}' type='checkbox' checked='' />
                           {% else %}
-                            <input id='{{ficha.slug}}' type='checkbox' />
+                            <input id='id_ficha_{{ficha.id}}' type='checkbox' />
                           {% endif %}
                           <span class='lever'></span>
                         </label>
                       </div>
                     </form>
+                  </td>
+                </tr>
 <script type='text/javascript'>
 // <![CDATA[
-                      $(function(){
-                        $('#{{ficha.slug}}').on('change',function(){
-                          $('#{{ficha.id}}').submit();
-                        });
-                      });
+                  $(function(){
+                    $('#id_ficha_{{ficha.id}}').on('change',function(){
+                      $('#{{ficha.id}}').submit();
+                    });
+                  });
 // ]]>
 </script>
+              {% empty %}
+                <tr>
+                  <td>
+                    <h5>Ainda não tem criança nesta sala</h5>
                   </td>
                 </tr>
               {% endfor %}
@@ -77,4 +95,5 @@
       </div>
     </div>
   </div>
+  {% include 'central/ficha_form.html' %}
 {% endblock %}

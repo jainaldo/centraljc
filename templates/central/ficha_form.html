@@ -1,0 +1,37 @@
+{% load material_form %}
+<div id='ficha_new' class='modal'>
+  <div class='modal-content'>
+    <h4 class='center'>Ficha para      {{ object }}
+</h4>
+    <form action='.' method='POST'>
+      {% csrf_token %}
+      {% form %}
+        {% part form.n_ficha prefix %}
+          <i class='fa fa-ticket prefix'></i>
+        {% endpart %}
+        {% part form.crianca prefix %}
+          <i class='fa fa-smile-o prefix'></i>
+        {% endpart %}
+        {% part form.responsavel prefix %}
+          <i class='fa fa-user prefix'></i>
+        {% endpart %}
+        {% part form.telefone prefix %}
+          <i class='fa fa-phone-square prefix'></i>
+        {% endpart %}
+      {% endform %}
+      <div class='modal-footer'>
+        <button class='btn green' type='submit' name='_submit_ficha_form'>Cadastrar</button>
+        <a class='modal-action modal-close waves-effect waves-green btn-flat' href='#!'>Cancelar</a>
+      </div>
+    </form>
+  </div>
+</div>
+<script type='text/javascript'>
+// <![CDATA[
+  $(document).ready(function(){
+    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+    $('.modal-trigger').leanModal();
+    $('#id_telefone').mask("(99) 9 9999-9999")
+  });
+// ]]>
+</script>

@@ -5,11 +5,8 @@
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %meta{:content => "width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no", :name => "viewport"}/
     %title Central de Atendimento - JC
-    - include 'material/includes/material_css.html'
-    - include 'material/includes/material_js.html'
-    %link{:href => "{% static 'css/style.css'%}", :rel => "stylesheet", :type => "text/css"}
-    %link{:href => "{% static 'css/main.css'%}", :rel => "stylesheet", :type => "text/css"}
-    %link{:href => "{% static 'font-awesome/css/font-awesome.css'%}", :rel => "stylesheet"}
+    - include 'includes/css.html'
+    - include 'includes/js.html'
   %body
     - include 'includes/navbar.html'
     .container
