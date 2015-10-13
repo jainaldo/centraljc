@@ -15,13 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from central.views import HomePageView, SalaDetailView
+from central.views import HomePageView, SalaDetailView, ajax_ficha_search
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', HomePageView.as_view(), name='home'),
-    url(r'^(?P<slug>[-_\w]+)/$', SalaDetailView.as_view(), name='sala_detail')
+    url(r'^ajax_search_ficha/$', ajax_ficha_search, name='ajax_search_ficha'),
+    url(r'^(?P<slug>[-_\w]+)/$', SalaDetailView.as_view(), name='sala_detail'),
 ]
 #+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

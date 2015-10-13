@@ -1,0 +1,45 @@
+%table.hoverable.responsive-table
+  %thead
+    %tr
+      %th{:data-field =>"n_ficha"}
+        Ficha
+      %th{:data-field =>"crianca"}
+        Nome da Criança
+      %th{:data-field =>"responsavel"}
+        Responsável
+      %th{:data-field =>"telefone"}
+        Telefone
+      %th{:data-field =>"ativo"}
+        Status
+  %tbody
+  - for ficha in list_fichas
+    %tr
+      %td
+        = ficha.n_ficha
+      %td
+        = ficha.crianca
+      %td
+        = ficha.responsavel
+      %td
+        = ficha.telefone
+      %td
+        %form{:action => "", :id => "{{ficha.id}}", :method => "POST"}
+          - csrf_token
+          %input{:type => "hidden", :name => "_submit_ficha_id_status", :value => "{{ficha.id}}"}
+          .switch
+            %label
+              - if ficha.ativo
+                %input{:id => "id_ficha_{{ficha.id}}", :checked => "", :type => "checkbox"}/
+              - else
+                %input{:id => "id_ficha_{{ficha.id}}", :type => "checkbox"}/
+              %span.lever
+    :javascript
+      $(function(){
+        $('#id_ficha_{{ficha.id}}').on('change',function(){
+          $('#{{ficha.id}}').submit();
+        });
+      });
+  - empty
+
+    .card-panel.{ :class => "error" }
+      %h6 Não tem criança cadastrada ou não foi possível encontrar criança pelo termo de busca!

@@ -1,0 +1,68 @@
+<table class='hoverable responsive-table'>
+  <thead>
+    <tr>
+      <th data-field='n_ficha'>
+        Ficha
+      </th>
+      <th data-field='crianca'>
+        Nome da Criança
+      </th>
+      <th data-field='responsavel'>
+        Responsável
+      </th>
+      <th data-field='telefone'>
+        Telefone
+      </th>
+      <th data-field='ativo'>
+        Status
+      </th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+  {% for ficha in list_fichas %}
+    <tr>
+      <td>
+        {{ ficha.n_ficha }}
+      </td>
+      <td>
+        {{ ficha.crianca }}
+      </td>
+      <td>
+        {{ ficha.responsavel }}
+      </td>
+      <td>
+        {{ ficha.telefone }}
+      </td>
+      <td>
+        <form id='{{ficha.id}}' action='' method='POST'>
+          {% csrf_token %}
+          <input type='hidden' name='_submit_ficha_id_status' value='{{ficha.id}}' />
+          <div class='switch'>
+            <label>
+              {% if ficha.ativo %}
+                <input id='id_ficha_{{ficha.id}}' type='checkbox' checked='' />
+              {% else %}
+                <input id='id_ficha_{{ficha.id}}' type='checkbox' />
+              {% endif %}
+              <span class='lever'></span>
+            </label>
+          </div>
+        </form>
+      </td>
+    </tr>
+<script type='text/javascript'>
+// <![CDATA[
+      $(function(){
+        $('#id_ficha_{{ficha.id}}').on('change',function(){
+          $('#{{ficha.id}}').submit();
+        });
+      });
+// ]]>
+</script>
+  {% empty %}
+
+    <div class='card-panel  error'>
+      <h6>Não tem criança cadastrada ou não foi possível encontrar criança pelo termo de busca!</h6>
+    </div>
+  {% endfor %}
+</table>

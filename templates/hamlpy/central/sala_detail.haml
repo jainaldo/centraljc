@@ -9,55 +9,25 @@
       .card
         .card-content
           %span.card-title.black-text
-            %h4.center
+            %h4#id_object.center
               = object
               Data: {% now 'd/m/Y'%}
               %a.right.btn-floating.btn-large.waves-effect.waves-light.green.modal-trigger{:href => "#ficha_new"}
                 %i.fa.fa-plus
+              %br
+              .input-field
+                %input#search.validate{:type => "text"}/
+                %label{:for => "search"} Pesquisar pelo número da ficha ou nome da criança ou responsável...
           .row
-            %table.hoverable.responsive-table
-              %thead
-                %tr
-                  %th{:data-field =>"n_ficha"}
-                    Ficha
-                  %th{:data-field =>"crianca"}
-                    Nome da Criança
-                  %th{:data-field =>"responsavel"}
-                    Responsável
-                  %th{:data-field =>"telefone"}
-                    Telefone
-                  %th{:data-field =>"ativo"}
-                    Status
-              %tbody
-              - for ficha in list_fichas
-                %tr
-                  %td
-                    = ficha.n_ficha
-                  %td
-                    = ficha.crianca
-                  %td
-                    = ficha.responsavel
-                  %td
-                    = ficha.telefone
-                  %td
-                    %form{:action => "", :id => "{{ficha.id}}", :method => "POST"}
-                      - csrf_token
-                      %input{:type => "hidden", :name => "_submit_ficha_id_status", :value => "{{ficha.id}}"}
-                      .switch
-                        %label
-                          - if ficha.ativo
-                            %input{:id => "id_ficha_{{ficha.id}}", :checked => "", :type => "checkbox"}/
-                          - else
-                            %input{:id => "id_ficha_{{ficha.id}}", :type => "checkbox"}/
-                          %span.lever
-                :javascript
-                  $(function(){
-                    $('#id_ficha_{{ficha.id}}').on('change',function(){
-                      $('#{{ficha.id}}').submit();
-                    });
-                  });
-              - empty
-                %tr
-                  %td
-                    %h5 Ainda não tem criança nesta sala
+            #fichas
+              - include 'central/table_ficha.html'
   - include 'central/ficha_form.html'
+  :javascript
+    $( document ).ready( function() {
+      $('#search').keyup(function(){
+        q = $('#search').val();
+        $.get('{% url 'ajax_search_ficha'%}', {'q': $('#search').val(), 'sala_id': {{ object.id }}}, function(data){
+          $('#fichas').html(data);
+        })
+      });
+    });
