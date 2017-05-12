@@ -77,12 +77,8 @@ def ajax_ficha_search(request):
     if request.is_ajax():
         q = request.GET.get('q')
         sala_id = request.GET.get('sala_id')
-        sala = get_object_or_404(
-            Sala,
-            id=sala_id)
-        list_fichas = Ficha.objects.filter(
-            sala=sala,
-            criado_em=hoje)
+        sala = get_object_or_404(Sala, id=sala_id)
+        list_fichas = Ficha.objects.filter(sala=sala, criado_em=hoje)
         if q:
             list_fichas = list_fichas.filter(
                 Q(n_ficha__contains=q) |
